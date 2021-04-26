@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const routes = require("./route/route")
+const routes = require("./src/route/route")
 
 // make the environment  variable globa
 dotenv.config();
