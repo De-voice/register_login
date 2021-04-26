@@ -16,7 +16,8 @@ const port = parseInt(process.env.PORT || 5000);
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
-})
+});
+
 const db = mongoose.connection;
 
 
