@@ -46,28 +46,26 @@ const userSignUp = async (req,res) => {
          area_code,
          location,
         password,
-         confirm_password,
     } = req.body;
 
     const user = new Users({
         full_name,  
-        email,
+         email,
          phone_number,
          area_code,
          location,
-        password,
-        confirm_password
+        password
        
     });
 
+
+    if(area_code.length < 5) {
+      return helpersMethod.handleRespones(res,401,"area")
+    }
+
     const salt = await bcrypt.genSalt(10);
-    if(password === confirm_password) {
-       user.password = await bcrypt.hash(password,salt)
-       user.confirm_password = await bcrypt.hash(confirm_password,salt)
-    }
-     if(password !== confirm_password){
-      return handleResponse(res,401, "password is not correct")
-    }
+    user.password = await bcrypt.hash(password,salt)
+
       await user.save();
 
     const token = helpersMethod.generateUserToken({... user._doc});
